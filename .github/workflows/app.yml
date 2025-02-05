@@ -1,4 +1,4 @@
-name: CI/CD for React Todo
+name: CI/CD for react Todo 
 
 on:
   push:
@@ -28,18 +28,27 @@ jobs:
           cd todo
           npm run build
 
+      - name: Upload artifact to enable deployment
+        uses: actions/upload-artifact@v4
+        with:
+          name: poduction file
+          path: ./todo/build
+
   # Deploy Job
   deploy:
+   
     needs: build
+    
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Git config
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: poduction file
+          path: ./todo/build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use the default GITHUB_TOKEN
+          github_token: ${{ secrets.GITHUB_TOKEN }} #this is the key of the access token
           publish_dir: ./todo/build
