@@ -17,5 +17,11 @@ jobs:
         
         - name: run a sample job
           run: echo hello world
+
+        - name: Upload artifact
+        - uses: action/ipload-artifact@v4
+          with:
+              name: build-artifact
+              path: ${{github.workspace}}
         
   
