@@ -7,7 +7,7 @@ import './TodoInput.css';
 function TodoInput({ todos, setTodos }) {
   const [todo, setTodo] = useState("");
 
-  function handleClick() {
+  
     //id,name, isComplete we need thies 3 data from one todo
     const newTodo = {
       id: 1,
